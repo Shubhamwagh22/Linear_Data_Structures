@@ -1,0 +1,29 @@
+def are_brackets_closed(code):
+    stack = []
+    bracket_pairs = {')': '(', '}': '{', ']': '['}
+
+    for char in code:
+        if char in '({[':
+            # If the character is an opening bracket, push it onto the stack
+            stack.append(char)
+        elif char in ')}]':
+            # If the character is a closing bracket, check if it matches the top of the stack
+            if not stack or stack.pop() != bracket_pairs[char]:
+                return False
+
+    # If the stack is empty after processing the code, all brackets are closed
+    return not stack
+
+# Example:
+code_snippet = "{[()()]}"
+result = are_brackets_closed(code_snippet)
+if result:
+    print("All brackets are properly closed.")
+else:
+    print("Brackets are not balanced.")
+
+
+
+##############################################
+Output:
+All brackets are properly closed.
