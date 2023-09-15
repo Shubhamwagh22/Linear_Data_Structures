@@ -1,0 +1,32 @@
+def is_operator(char):
+    return char in "+-*/^"
+
+def prefix_to_infix(prefix_expression):
+    stack = []
+    operators = set(['+', '-', '*', '/', '^'])
+
+    for symbol in reversed(prefix_expression):
+        if not is_operator(symbol):
+            # If the symbol is an operand, push it onto the stack
+            stack.append(symbol)
+        else:
+            # If the symbol is an operator, pop the top two operands from the stack
+            operand1 = stack.pop()
+            operand2 = stack.pop()
+
+            # Combine them with the operator to form an infix expression
+            infix_expression = f"({operand1}{symbol}{operand2})"
+            stack.append(infix_expression)
+
+    # The final result should be at the top of the stack
+    return stack[0]
+
+# Example :
+prefix_expression = "+*23*45"
+infix_expression = prefix_to_infix(prefix_expression)
+print("Infix Expression:", infix_expression)
+
+
+#######################################################
+Output:
+Infix Expression: ((2*3)+(4*5))
