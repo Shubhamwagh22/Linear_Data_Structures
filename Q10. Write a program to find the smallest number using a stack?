@@ -1,0 +1,41 @@
+class MinStack:
+    def __init__(self):
+        self.stack = []  # Main stack to store elements
+        self.min_stack = []  # Stack to track minimum elements
+
+    def push(self, value):
+        self.stack.append(value)
+
+        # Check if the min stack is empty or if the new value is smaller than the current minimum
+        if not self.min_stack or value <= self.min_stack[-1]:
+            self.min_stack.append(value)
+
+    def pop(self):
+        if not self.stack:
+            return None
+
+        popped_value = self.stack.pop()
+
+        # If the popped value is the minimum, also pop it from the min stack
+        if popped_value == self.min_stack[-1]:
+            self.min_stack.pop()
+
+        return popped_value
+
+    def get_min(self):
+        if not self.min_stack:
+            return None
+        return self.min_stack[-1]
+
+# Example :
+stack = MinStack()
+stack.push(5)
+stack.push(2)
+stack.push(10)
+stack.push(1)
+
+print("Smallest number:", stack.get_min())
+
+####################################################
+Output:
+Smallest number: 1
