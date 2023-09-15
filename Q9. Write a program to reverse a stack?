@@ -1,0 +1,36 @@
+def reverse_stack(stack):
+    if not stack:
+        return
+
+    # Pop the top element from the original stack
+    top_element = stack.pop()
+
+    # Recursively reverse the remaining elements
+    reverse_stack(stack)
+
+    # Insert the top element at the bottom of the stack
+    insert_at_bottom(stack, top_element)
+
+def insert_at_bottom(stack, element):
+    if not stack:
+        stack.append(element)
+        return
+
+    # Pop the top element from the stack
+    top_element = stack.pop()
+
+    # Recursively insert the element at the bottom
+    insert_at_bottom(stack, element)
+
+    # Push the top element back onto the stack
+    stack.append(top_element)
+
+# Example:
+a = [1, 2, 3, 4, 5]
+reverse_stack(a)
+print("Reversed Stack:", a)
+
+
+################################################
+Output:
+Reversed Stack: [5, 4, 3, 2, 1]
