@@ -1,0 +1,34 @@
+'''
+Infix Notation: In infix notation, operators are placed between operands, and parentheses are used to determine the order of evaluation. For example, 2 + 3 * 4 is an infix expression.
+Prefix Notation (Polish Notation): In prefix notation, operators are placed before their operands. For example, + * 2 3 4 is a prefix expression.
+Postfix Notation (Reverse Polish Notation): In postfix notation, operators are placed after their operands. For example, 2 3 4 * + is a postfix expression.
+'''
+
+def postfix_to_prefix(postfix_expression):
+    stack = []
+    operators = set(['+', '-', '*', '/', '^'])
+
+    for symbol in postfix_expression:
+        if symbol not in operators:
+            # If the symbol is an operand, push it onto the stack
+            stack.append(symbol)
+        else:
+            # If the symbol is an operator, pop the top two operands from the stack
+            operand2 = stack.pop()
+            operand1 = stack.pop()
+
+            # Combine them with the operator and push the result back onto the stack
+            prefix_expression = symbol + operand1 + operand2
+            stack.append(prefix_expression)
+
+    # The final result should be at the top of the stack
+    return stack[0]
+
+# Example:
+postfix_expression = "23*4+7-8"
+prefix_expression = postfix_to_prefix(postfix_expression)
+print("Prefix Expression:", prefix_expression)
+
+#######################################################
+Output:
+Prefix Expression: -+*2347
